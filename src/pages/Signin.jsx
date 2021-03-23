@@ -60,7 +60,7 @@ const formik=useFormik(
         onBlur={formik.handleBlur}
         touched={formik.touched.Password}
         error={formik.errors.Password}></Password><br></br>
-        <a href='' style={{float:"right"}}>Forgot Password?</a><br></br><br></br>
+        <a href='forgotpasslink ' style={{float:"right"}}>Forgot Password?</a><br></br><br></br>
 
         <SubmitButton buttonContaint="Sign in"></SubmitButton>
         

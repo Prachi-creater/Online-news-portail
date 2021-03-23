@@ -19,7 +19,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PersonIcon from '@material-ui/icons/Person';
-import {BrowserRouter as Router,Switch,Route, Link } from "react-router-dom";
+import {BrowserRouter as Router, Link, withRouter } from "react-router-dom";
 
 
 const drawerWidth = 240;
@@ -29,6 +29,9 @@ const icons = [
     <DeleteIcon />,
     <PersonIcon />
 ]
+
+const routes = ['/admin/dashboard','/admin/addnews','/admin/deletenews','/admin/usermanagement'];
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -89,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dashboard() {
+function Dashboard({history}) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -105,7 +108,9 @@ export default function Dashboard() {
     return (
 
         <div className={classes.root}>
+            <Router>
             <CssBaseline />
+
             <AppBar
                 position="fixed"
                 className={clsx(classes.appBar, {
@@ -142,47 +147,40 @@ export default function Dashboard() {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>
-                    <Link to="/" className={classes.link} >
-                        {['Home', 'Add News', 'Delete News', 'User Management'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{icons[index]}</ListItemIcon>
-                                <ListItemText primary={text}/>
+                <List>                                                  
+                            <ListItem button key={0} onClick={()=>history.push(routes[0])}>
+                                <ListItemIcon>{icons[0]}</ListItemIcon>
+                                <ListItemText primary={"Home"} />
                             </ListItem>
-                        
-                    ))}
-                    </Link>
+                            <ListItem button key={1} onClick={()=>history.push(routes[1])}>
+                                <ListItemIcon>{icons[1]}</ListItemIcon>
+                                <ListItemText primary={"Add News"}/>
+                            </ListItem>
+                            <ListItem button key={2} onClick={()=>history.push(routes[2])}>
+                                <ListItemIcon>{icons[2]}</ListItemIcon>
+                                <ListItemText primary={"Delete News"}/>
+                            </ListItem>
+                            <ListItem button key={3} onClick={()=>history.push(routes[3])}>
+                                <ListItemIcon>{icons[3]}</ListItemIcon>
+                                <ListItemText primary={"User Management"}/>
+                            </ListItem>
+                           
+                  
                 </List>
                 <Divider />
 
             </Drawer>
-            <main
-                className={clsx(classes.content, {
-                    [classes.contentShift]: open,
-                })}
-            >
-                {/* <Route exact path="/" component={Home}/> */}
-                {/* <Route exact path="/add news" component={AddNews}/>
-                <Route exact path="/delete news" component={DeleteNews}/>
-                <Route exact path="/user management" component={UserManagement}/> */}
-                <div className={classes.drawerHeader} />
-                {/* <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                    facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                    gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                    donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                    adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                    Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                    imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                    arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                    donec massa sapien faucibus et molestie ac.
-        </Typography> */}
-
-
-            </main>
-            
+            </Router>
+            <main className={classes.content}>
+        <Toolbar />
+        <Typography paragraph>
+          <div><center>This is Admin Dashboard Page</center></div>
+        </Typography>
+        
+      </main>
         </div>
     
     );
 }
+
+export default withRouter(Dashboard);

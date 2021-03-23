@@ -4,11 +4,11 @@ import SignUp from './pages/Signup'
 import Admin from './pages/Admin'
 import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
-// import AddNewsPage from './pages/AddNews'
-// import DeleteNewsPage from './pages/Deletenews'
-// import UserManPage from './pages/UserManagement'
+import AddNewsPage from './pages/AddNews'
+import DeleteNewsPage from './pages/Deletenews'
+import UserManPage from './pages/UserManagement'
 import Dashboard2 from './pages/Dashboard2'
-import {BrowserRouter as Router,Switch,Route, Link } from "react-router-dom";
+import {BrowserRouter as Router,Switch,Route } from "react-router-dom";
 
 
 
@@ -17,15 +17,14 @@ return (
     <div>
       <Router>
         <Switch>
-          <Route path='/signin' component={SignIn}/>
-          <Route path='/signup' component={SignUp}/>
-          <Route path='/admin' component={Admin}/>
-          <Route path='/dashboard' component={Dashboard}/>
-          <Route path='/' component={Home}/>
-          {/* <Route path='/add news' component={AddNews}/>
-          <Route path='/delete news' component={DeleteNews}/>
-          <Route path='/user management' component={UserManangement}/> */}
-          <Route path='/dashboard2' component={Dashboard2}></Route>
+          <Route exact path='/' render={(props)=><Home {...props}></Home>}/>
+          <Route exact path='/signin' render={(props)=><SignIn {...props}></SignIn>}/>
+          <Route exact path='/signup' render={(props)=><SignUp {...props}></SignUp>}/>
+          <Route exact path='/admin' render={(props)=><Admin {...props}></Admin>}/>
+          <Route exact path='/admin/dashboard' render={(props)=><Dashboard {...props}></Dashboard>}/>         
+          <Route exact path='/admin/addnews' render={(props)=><AddNewsPage {...props}></AddNewsPage>}/>
+          <Route exact path='/admin/deletenews' render={(props)=><DeleteNewsPage {...props}></DeleteNewsPage>}/>
+          <Route exact path='/admin/usermanagement' render={(props)=><UserManPage {...props}></UserManPage>}/> 
        
         </Switch>
         </Router>

@@ -1,63 +1,57 @@
-import React from 'react'
-import { makeStyles} from '@material-ui/core/styles';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import HomeIcon from '@material-ui/icons/Home';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import React from "react";
+import {
+  Drawer as MUIDrawer,
+  ListItem,
+  List,
+  ListItemIcon,
+  ListItemText
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
+import { withRouter } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-    drawerPaper: {
-        width: 'inherit'
+const useStyles = makeStyles({
+  drawer: {
+    width: "190px"
+  }
+});
+
+const Drawer = props => {
+  const { history } = props;
+  const classes = useStyles();
+  const itemsList = [
+    {
+      text: "Home",
+      icon: <InboxIcon />,
+      onClick: () => history.push("/")
     },
-    link:{
-        textDecoration:'none',
-        color:theme.palette.text.primary}
-}))
+    {
+      text: "About",
+      icon: <MailIcon />,
+      onClick: () => history.push("/admin")
+    },
+    {
+      text: "Contact",
+      icon: <MailIcon />,
+      onClick: () => history.push("/admin/addnews")
+    }
+  ];
+  return (
+    <MUIDrawer variant="permanent" className={classes.drawer}>
+      <List>
+        {itemsList.map((item, index) => {
+          const { text, icon, onClick } = item;
+          return (
+            <ListItem button key={text} onClick={onClick}>
+              {icon && <ListItemIcon>{icon}</ListItemIcon>}
+              <ListItemText primary={text} />
+            </ListItem>
+          );
+        })}
+      </List>
+    </MUIDrawer>
+  );
+};
 
-
-export default function Dashboard2() {
-    const classes = useStyles();
-    return (
-        <Router>
-            <div style={{ display: 'flex' }}>
-                <Drawer
-                    style={{ width: '220px' }}
-                    varient="persistent"
-                    anchor="left"
-                    open={true}
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                >
-                    
-                    <List>
-                    <Link to="/" className={classes.link} >
-                        <ListItem button>
-                            <ListItemIcon>
-                                < HomeIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={"Home"} />
-                        </ListItem>
-                        </Link>
-                        <Link to="/add news" className={classes.link} >
-                        <ListItem button>
-                            <ListItemIcon>
-                                < AddBoxIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary={"Add News"} />
-                        </ListItem>
-                        </Link>
-                    </List>
-
-
-                </Drawer>
-
-            </div>
-        </Router>
-
-    )
-}
+export default withRouter(Drawer);
