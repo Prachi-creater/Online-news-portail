@@ -175,7 +175,7 @@ function AddNewsPage({history}) {
         <main className={classes.content} style={{marginLeft:240}}>
         <Toolbar />
         <Typography paragraph>
-          <div><center>This is Add News Page</center></div>
+          <div><center>This is Add News Page test chnage</center></div>
           <Input></Input>
         </Typography>
         
