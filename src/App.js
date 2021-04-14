@@ -7,7 +7,6 @@ import Home from './pages/Home'
 import AddNewsPage from './pages/AddNews'
 import DeleteNewsPage from './pages/Deletenews'
 import UserManPage from './pages/UserManagement'
-import Dashboard2 from './pages/Dashboard2'
 import {BrowserRouter as Router,Switch,Route } from "react-router-dom";
 
 
